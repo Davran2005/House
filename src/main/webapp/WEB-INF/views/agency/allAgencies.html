@@ -37,6 +37,11 @@
       <form th:method="DELETE" th:action="@{/agencies/{id}/delete(id=${agency.getId()})}">
         <input type="submit" class="btn btn-primary" th:value="DELETE"/>
       </form>
+
+      <td><a th:href="@{/houses/{agencyId}(agencyId=${agency.id})}" class="btn btn-primary">
+        <button>Houses</button>
+      </a>
+      </td>
     </div>
   </div>
 </div>

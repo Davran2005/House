@@ -6,8 +6,8 @@ import peaksoft.model.House;
 import java.util.List;
 
 public interface HouseRep {
-    void saveHouse(House house);
-    List<House> getAllHouses(String word);
+    void saveHouse(Long agencyId, House house);
+    List<House> getAllHouses(Long agencyId,String word);
     House getHouseById(Long id);
     void updateHouseById(Long id, House house);
     void deleteHouseById(Long id);

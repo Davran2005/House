@@ -12,6 +12,8 @@ import peaksoft.service.AgencySer;
 @RequiredArgsConstructor
 public class AgencyApi {
     private final AgencySer agencySer;
+
+
     @GetMapping
     public String getAllAgency(@RequestParam(value = "word",required = false) String word,Model model) {
         model.addAttribute("agencies", agencySer.getAllAgencies(word));

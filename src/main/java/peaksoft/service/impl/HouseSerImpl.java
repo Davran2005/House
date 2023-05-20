@@ -15,13 +15,13 @@ public class HouseSerImpl implements HouseSer {
     private final HouseRep houseRep;
 
     @Override
-    public void saveHouse(House house) {
-        houseRep.saveHouse(house);
+    public void saveHouse(Long agencyId, House house) {
+        houseRep.saveHouse(agencyId,house);
     }
 
     @Override
-    public List<House> getAllHouses(String word) {
-        return houseRep.getAllHouses(word);
+    public List<House> getAllHouses(Long agencyId, String word) {
+        return houseRep.getAllHouses(agencyId,word);
     }
 
     @Override

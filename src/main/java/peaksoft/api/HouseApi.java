@@ -9,27 +9,30 @@ import peaksoft.model.House;
 import peaksoft.service.HouseSer;
 
 @Controller
-@RequestMapping("/houses")
+@RequestMapping("/houses/{agencyId}")
 @RequiredArgsConstructor
 public class HouseApi {
     private final HouseSer houseSer;
 
+
+
     @GetMapping
-    public String getAllHouse(@RequestParam(value = "word",required = false) String word, Model model) {
-        model.addAttribute("houses", houseSer.getAllHouses(word));
+    public String getAllHouse(@RequestParam(value = "word",required = false) @PathVariable Long agencyId, String word, Model model) {
+        model.addAttribute("houses", houseSer.getAllHouses(agencyId,word));
         model.addAttribute("word", word);
+        model.addAttribute( agencyId);
         return "house/allHouse";
     }
     @GetMapping("/new")
-    public String create(Model model) {
+    public String create(@PathVariable Long agencyId, Model model) {
         model.addAttribute("house", new House());
         return "house/newHouse";
     }
 
     @PostMapping("/saveHouse")
-    public String saveAgency(@ModelAttribute("house") House house) {
-       houseSer.saveHouse(house);
-        return "redirect:/houses";
+    public String saveAgency(@PathVariable Long agencyId, @ModelAttribute("house") House house) {
+       houseSer.saveHouse(agencyId,house);
+        return "redirect:/houses/"+agencyId;
     }
     @GetMapping("/{id}")
     public String getHouseById(@PathVariable("id") Long id, Model model) {

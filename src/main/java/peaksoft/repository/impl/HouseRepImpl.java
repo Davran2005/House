@@ -22,14 +22,20 @@ public class HouseRepImpl implements HouseRep {
     private final EntityManager entityManager;
 
     @Override
-    public void saveHouse(House house) {
+    public void saveHouse(Long agencyId, House house) {
+        Agency agency = entityManager.find(Agency.class, agencyId);
+        agency.getHouses().add(house);
+        house.setAgency(agency);
         entityManager.persist(house);
     }
 
+
+
+
     @Override
-    public List<House> getAllHouses(String word) {
+    public List<House> getAllHouses(Long agencyId, String word) {
         if (word == null || word.isEmpty()) {
-        return entityManager.createQuery("from House a", House.class).getResultList();
+        return entityManager.createQuery("from House a", House.class).setParameter("agencyId",agencyId).getResultList();
         } else {
             return entityManager.createQuery("select u from House u where u.address ilike :word or u.country ilike :word ", House.class)
                     .setParameter("word", "%" + word + "%").setParameter("word", word)

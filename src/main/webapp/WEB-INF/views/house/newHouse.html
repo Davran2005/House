@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form th:method="POST" th:action="@{/houses/saveHouse}" th:object="${house}">
+ <form th:action="@{/houses/{agencyId}/save(agencyId=${agencyId})}" th:object="${house}" th:method="POST">
   <div class="mb-3">
     <label for="houseType" class="form-label">Select houseType</label>
     <select class="form-select" id="houseType" name="houseType" required th:field="*{houseType}">
