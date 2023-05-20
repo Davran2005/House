@@ -2,9 +2,7 @@ package peaksoft.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 import peaksoft.enums.Gender;
-import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -12,12 +10,12 @@ import java.util.List;
 import static jakarta.persistence.CascadeType.*;
 
 @Entity
-@Table(name = "costumers")
+@Table(name = "customers")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Costumer {
+public class Customer {
     @Id
     @GeneratedValue(generator = "costumer_gen",strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name ="costumer_gen",sequenceName = "costumer_seq",allocationSize = 1)
@@ -26,6 +24,7 @@ public class Costumer {
     private String firstName;
     private String lastName;
     private String email;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     private int age;
     private String phoneNumber;
@@ -34,6 +33,6 @@ public class Costumer {
 
     @ManyToMany(cascade = {DETACH, MERGE,REFRESH,REMOVE})
     private List<Agency>agencies;
-    @OneToMany(mappedBy = "customers",cascade = {DETACH, MERGE,REFRESH})
+    @OneToMany(mappedBy = "customer",cascade = {DETACH, MERGE,REFRESH})
     private List<Booking>bookings;
 }

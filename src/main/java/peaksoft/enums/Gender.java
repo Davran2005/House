@@ -1,2 +1,6 @@
-package peaksoft.enums;public enum Gender {
+package peaksoft.enums;
+
+public enum Gender {
+    MALE,
+    FEMALE
 }
