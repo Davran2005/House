@@ -35,7 +35,7 @@ public class HouseRepImpl implements HouseRep {
     @Override
     public List<House> getAllHouses(Long agencyId, String word) {
         if (word == null || word.isEmpty()) {
-        return entityManager.createQuery("from House a", House.class).setParameter("agencyId",agencyId).getResultList();
+        return entityManager.createQuery("select h from House h join h.agency a where a.id = :agencyId", House.class).setParameter("agencyId",agencyId).getResultList();
         } else {
             return entityManager.createQuery("select u from House u where u.address ilike :word or u.country ilike :word ", House.class)
                     .setParameter("word", "%" + word + "%").setParameter("word", word)

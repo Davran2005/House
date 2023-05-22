@@ -18,7 +18,7 @@ import static jakarta.persistence.CascadeType.*;
 public class House {
     @Id
     @GeneratedValue(generator = "house_gen", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "house_gen",sequenceName = "house_seq",allocationSize = 1)
+    @SequenceGenerator(name = "house_gen", sequenceName = "house_seq", allocationSize = 1)
     private Long id;
     @Enumerated(EnumType.STRING)
     private HouseType houseType;
@@ -28,8 +28,10 @@ public class House {
     private String country;
     private String description;
     private String isBooked;
-    @ManyToOne(cascade = {DETACH, MERGE,REFRESH,REMOVE})
+    @Transient
+    private String houseTypeString;
+    @ManyToOne(cascade = {DETACH, MERGE, REFRESH, REMOVE})
     private Agency agency;
-    @OneToOne(mappedBy = "house",cascade = {DETACH, MERGE,REFRESH})
+    @OneToOne(mappedBy = "house", cascade = {DETACH, MERGE, REFRESH})
     private Booking booking;
 }

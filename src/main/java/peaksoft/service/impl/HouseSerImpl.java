@@ -2,6 +2,7 @@ package peaksoft.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import peaksoft.enums.HouseType;
 import peaksoft.model.Agency;
 import peaksoft.model.House;
 import peaksoft.repository.HouseRep;
@@ -16,12 +17,13 @@ public class HouseSerImpl implements HouseSer {
 
     @Override
     public void saveHouse(Long agencyId, House house) {
-        houseRep.saveHouse(agencyId,house);
+        house.setHouseType(HouseType.valueOf(house.getHouseTypeString()));
+        houseRep.saveHouse(agencyId, house);
     }
 
     @Override
     public List<House> getAllHouses(Long agencyId, String word) {
-        return houseRep.getAllHouses(agencyId,word);
+        return houseRep.getAllHouses(agencyId, word);
     }
 
     @Override

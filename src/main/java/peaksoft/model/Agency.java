@@ -26,7 +26,7 @@ public class Agency {
     private String phoneNumber;
     private String email;
     private String photo;
-    @OneToMany(mappedBy = "agency",cascade = {DETACH, MERGE,REFRESH})
+    @OneToMany(mappedBy = "agency",cascade = {ALL})
     private List<House> houses;
     @ManyToMany(mappedBy = "agencies",cascade = {DETACH, MERGE,REFRESH})
     private List<Customer>costumers;
